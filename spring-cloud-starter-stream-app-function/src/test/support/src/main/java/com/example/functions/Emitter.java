@@ -16,19 +16,20 @@
 
 package com.example.functions;
 
+import java.time.Duration;
 import java.util.function.Supplier;
+
+import reactor.core.publisher.Flux;
 
 /**
  * @author Eric Bottard
  */
-public class Emitter implements Supplier<String> {
-
-	private int i = 0;
-
-	private String[] values = {"one", "two", "three", "four"};
+public class Emitter implements Supplier<Flux<String>> {
 
 	@Override
-	public String get() {
-		return values[i++ % values.length];
+	public Flux<String> get() {
+		return Flux.interval(Duration.ofMillis(1000))
+		           .map(Object::toString)
+		           .log();
 	}
 }

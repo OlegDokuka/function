@@ -39,7 +39,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = FunctionAppConfiguration.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @TestPropertySource(properties = {
-        "function.location=file:src/test/resources/function-sample-1.0.0.BUILD-SNAPSHOT.jar",
+        "function.location=file:src/test/resources/function-sample-1.0.0.M1.jar",
         })
 public abstract class FunctionAppConfigurationTests {
 
@@ -59,7 +59,7 @@ public abstract class FunctionAppConfigurationTests {
         public void test() throws Exception {
 
             Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
-            assertThat(received.getPayload(), Matchers.is("one"));
+            assertThat(received.getPayload(), Matchers.is("0"));
 
         }
 
